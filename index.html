@@ -1,1150 +1,831 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prudential Guarantee and Assurance, Inc. | Insuring Growth</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --navy: #0a1e3d;
-            --navy-mid: #102a4a;
-            --blue: #1a5276;
-            --blue-accent: #2980b9;
-            --gold: #c9a84c;
-            --gold-light: #dfc373;
-            --cream: #faf8f4;
-            --white: #ffffff;
-            --gray-50: #f8f9fa;
-            --gray-100: #f0f1f3;
-            --gray-200: #e2e4e8;
-            --gray-400: #9ca3af;
-            --gray-600: #5a6577;
-            --gray-800: #2d3748;
-            --serif: 'DM Serif Display', Georgia, serif;
-            --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --shadow-sm: 0 1px 3px rgba(10,30,61,0.06);
-            --shadow-md: 0 4px 16px rgba(10,30,61,0.08);
-            --shadow-lg: 0 12px 40px rgba(10,30,61,0.12);
-            --radius: 6px;
-        }
-
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: var(--sans);
-            color: var(--gray-800);
-            background: var(--white);
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* ─── Top Bar ─── */
-        .top-bar {
-            background: var(--navy);
-            padding: 8px 0;
-            font-size: 12px;
-            letter-spacing: 0.3px;
-        }
-
-        .top-bar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .top-bar-left {
-            color: rgba(255,255,255,0.5);
-        }
-
-        .top-bar-right {
-            display: flex;
-            gap: 24px;
-        }
-
-        .top-bar a {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            transition: color 0.2s;
-            font-weight: 500;
-        }
-
-        .top-bar a:hover { color: var(--gold-light); }
-
-        /* ─── Header ─── */
-        .header {
-            background: var(--white);
-            border-bottom: 1px solid var(--gray-200);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            transition: box-shadow 0.3s;
-        }
-
-        .header.scrolled {
-            box-shadow: var(--shadow-md);
-        }
-
-        .header .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 72px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            text-decoration: none;
-        }
-
-        .logo-mark {
-            width: 44px;
-            height: 44px;
-            position: relative;
-        }
-
-        .logo-mark svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .logo-text .brand {
-            font-family: var(--serif);
-            font-size: 20px;
-            color: var(--navy);
-            line-height: 1.1;
-        }
-
-        .logo-text .tagline {
-            font-size: 10.5px;
-            color: var(--gold);
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-top: 1px;
-        }
-
-        .nav {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-
-        .nav a {
-            text-decoration: none;
-            color: var(--gray-600);
-            font-size: 13.5px;
-            font-weight: 600;
-            padding: 8px 18px;
-            border-radius: var(--radius);
-            transition: all 0.2s;
-            letter-spacing: 0.2px;
-        }
-
-        .nav a:hover {
-            color: var(--navy);
-            background: var(--gray-50);
-        }
-
-        .nav a.active {
-            color: var(--navy);
-            background: var(--gray-100);
-        }
-
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius);
-            padding: 8px;
-            cursor: pointer;
-            color: var(--navy);
-        }
-
-        /* ─── Hero ─── */
-        .hero {
-            position: relative;
-            height: 560px;
-            overflow: hidden;
-        }
-
-        .hero-slide {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            transition: opacity 1.2s ease;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero-slide.active { opacity: 1; }
-
-        .hero-slide::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-        }
-
-        .hero-slide:nth-child(1) {
-            background: var(--navy);
-        }
-
-        .hero-slide:nth-child(1)::before {
-            background:
-                radial-gradient(ellipse 80% 60% at 20% 50%, rgba(26,82,118,0.7) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 80% at 80% 20%, rgba(201,168,76,0.15) 0%, transparent 60%),
-                linear-gradient(180deg, rgba(10,30,61,0) 0%, rgba(10,30,61,0.4) 100%);
-        }
-
-        .hero-slide:nth-child(2) {
-            background: linear-gradient(135deg, #0c2340 0%, #1a5276 100%);
-        }
-
-        .hero-slide:nth-child(2)::before {
-            background:
-                radial-gradient(ellipse 60% 60% at 70% 40%, rgba(201,168,76,0.12) 0%, transparent 60%),
-                radial-gradient(ellipse 80% 50% at 30% 70%, rgba(26,82,118,0.5) 0%, transparent 60%);
-        }
-
-        .hero-slide:nth-child(3) {
-            background: linear-gradient(160deg, #0a1e3d 0%, #14365c 60%, #1a5276 100%);
-        }
-
-        .hero-slide:nth-child(3)::before {
-            background:
-                radial-gradient(ellipse 70% 70% at 60% 30%, rgba(41,128,185,0.2) 0%, transparent 60%),
-                radial-gradient(ellipse 50% 50% at 20% 80%, rgba(201,168,76,0.1) 0%, transparent 50%);
-        }
-
-        .hero-pattern {
-            position: absolute;
-            inset: 0;
-            opacity: 0.03;
-            background-image:
-                linear-gradient(30deg, #fff 12%, transparent 12.5%, transparent 87%, #fff 87.5%, #fff),
-                linear-gradient(150deg, #fff 12%, transparent 12.5%, transparent 87%, #fff 87.5%, #fff),
-                linear-gradient(30deg, #fff 12%, transparent 12.5%, transparent 87%, #fff 87.5%, #fff),
-                linear-gradient(150deg, #fff 12%, transparent 12.5%, transparent 87%, #fff 87.5%, #fff);
-            background-size: 80px 140px;
-            background-position: 0 0, 0 0, 40px 70px, 40px 70px;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 0 24px;
-            width: 100%;
-        }
-
-        .hero-label {
-            display: inline-block;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 20px;
-            padding: 6px 16px;
-            border: 1px solid rgba(201,168,76,0.3);
-            border-radius: 3px;
-        }
-
-        .hero-content h1 {
-            font-family: var(--serif);
-            font-size: 52px;
-            font-weight: 400;
-            color: var(--white);
-            line-height: 1.15;
-            margin-bottom: 20px;
-            max-width: 580px;
-        }
-
-        .hero-content p {
-            font-size: 17px;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.7;
-            max-width: 480px;
-            margin-bottom: 36px;
-        }
-
-        .hero-buttons { display: flex; gap: 12px; }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 28px;
-            border-radius: var(--radius);
-            font-family: var(--sans);
-            font-size: 13.5px;
-            font-weight: 600;
-            text-decoration: none;
-            letter-spacing: 0.3px;
-            transition: all 0.25s;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-gold {
-            background: var(--gold);
-            color: var(--navy);
-        }
-
-        .btn-gold:hover {
-            background: var(--gold-light);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(201,168,76,0.3);
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: rgba(255,255,255,0.85);
-            border: 1px solid rgba(255,255,255,0.25);
-        }
-
-        .btn-ghost:hover {
-            border-color: rgba(255,255,255,0.5);
-            color: var(--white);
-            background: rgba(255,255,255,0.05);
-        }
-
-        .btn-navy {
-            background: var(--navy);
-            color: var(--white);
-        }
-
-        .btn-navy:hover {
-            background: var(--navy-mid);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(10,30,61,0.2);
-        }
-
-        .btn-outline-navy {
-            background: transparent;
-            color: var(--navy);
-            border: 1.5px solid var(--gray-200);
-        }
-
-        .btn-outline-navy:hover {
-            border-color: var(--navy);
-            background: var(--gray-50);
-        }
-
-        .hero-nav {
-            position: absolute;
-            bottom: 32px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
-            display: flex;
-            gap: 8px;
-        }
-
-        .hero-nav button {
-            width: 40px;
-            height: 4px;
-            border: none;
-            border-radius: 2px;
-            background: rgba(255,255,255,0.25);
-            cursor: pointer;
-            transition: all 0.3s;
-            padding: 0;
-        }
-
-        .hero-nav button.active {
-            background: var(--gold);
-            width: 56px;
-        }
-
-        /* ─── Stats Bar ─── */
-        .stats-bar {
-            background: var(--white);
-            border-bottom: 1px solid var(--gray-100);
-            padding: 0;
-            position: relative;
-            z-index: 10;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 32px 20px;
-            border-right: 1px solid var(--gray-100);
-        }
-
-        .stat-item:last-child { border-right: none; }
-
-        .stat-number {
-            font-family: var(--serif);
-            font-size: 36px;
-            color: var(--navy);
-            line-height: 1;
-            margin-bottom: 6px;
-        }
-
-        .stat-label {
-            font-size: 12.5px;
-            color: var(--gray-400);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-        }
-
-        /* ─── Products ─── */
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 56px;
-        }
-
-        .section-header .overline {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 12px;
-        }
-
-        .section-header h2 {
-            font-family: var(--serif);
-            font-size: 36px;
-            color: var(--navy);
-            margin-bottom: 14px;
-            line-height: 1.2;
-        }
-
-        .section-header p {
-            font-size: 16px;
-            color: var(--gray-600);
-            max-width: 520px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 16px;
-        }
-
-        .product-card {
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            border-radius: 8px;
-            padding: 28px 16px 22px;
-            text-align: center;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .product-card:hover {
-            border-color: var(--blue-accent);
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-4px);
-        }
-
-        .product-card:hover .product-icon {
-            background: var(--navy);
-        }
-
-        .product-card:hover .product-icon svg {
-            stroke: var(--gold);
-        }
-
-        .product-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 12px;
-            background: var(--gray-50);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px;
-            transition: all 0.3s;
-        }
-
-        .product-icon svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--blue);
-            stroke-width: 1.8;
-            fill: none;
-            transition: stroke 0.3s;
-        }
-
-        .product-card h3 {
-            font-size: 13.5px;
-            font-weight: 600;
-            color: var(--navy);
-            line-height: 1.35;
-        }
-
-        /* ─── Features ─── */
-        .features-section {
-            background: var(--cream);
-            position: relative;
-        }
-
-        .features-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gray-200), transparent);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        .feature-card {
-            background: var(--white);
-            border-radius: 8px;
-            padding: 36px 28px;
-            border: 1px solid var(--gray-200);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gold);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s;
-        }
-
-        .feature-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-        }
-
-        .feature-card:hover::after {
-            transform: scaleX(1);
-        }
-
-        .feature-number {
-            font-family: var(--serif);
-            font-size: 32px;
-            color: var(--gold);
-            line-height: 1;
-            margin-bottom: 16px;
-        }
-
-        .feature-card h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 10px;
-        }
-
-        .feature-card p {
-            font-size: 14px;
-            color: var(--gray-600);
-            line-height: 1.65;
-        }
-
-        /* ─── CTA ─── */
-        .cta-section {
-            background: var(--navy);
-            padding: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 60% 60% at 80% 50%, rgba(26,82,118,0.4) 0%, transparent 60%),
-                radial-gradient(ellipse 40% 60% at 10% 30%, rgba(201,168,76,0.08) 0%, transparent 50%);
-        }
-
-        .cta-inner {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-        }
-
-        .cta-text h2 {
-            font-family: var(--serif);
-            font-size: 34px;
-            color: var(--white);
-            margin-bottom: 14px;
-            line-height: 1.2;
-        }
-
-        .cta-text p {
-            font-size: 16px;
-            color: rgba(255,255,255,0.6);
-            max-width: 480px;
-            line-height: 1.6;
-        }
-
-        .cta-actions {
-            display: flex;
-            gap: 12px;
-            flex-shrink: 0;
-        }
-
-        /* ─── Footer ─── */
-        .footer {
-            background: #060f1d;
-            color: rgba(255,255,255,0.4);
-            padding: 64px 0 0;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.8fr 1fr 1fr 1fr;
-            gap: 48px;
-            padding-bottom: 48px;
-        }
-
-        .footer-brand .brand-name {
-            font-family: var(--serif);
-            font-size: 18px;
-            color: var(--white);
-            margin-bottom: 4px;
-        }
-
-        .footer-brand .brand-tagline {
-            font-size: 10px;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .footer-brand p {
-            font-size: 13.5px;
-            line-height: 1.7;
-        }
-
-        .footer-contact {
-            margin-top: 16px;
-            font-size: 13.5px;
-            line-height: 1.8;
-        }
-
-        .footer h4 {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.6);
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 8px;
-        }
-
-        .footer-links a {
-            font-size: 13.5px;
-            color: rgba(255,255,255,0.4);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--gold-light);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.06);
-            padding: 24px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-        }
-
-        .footer-bottom a {
-            color: rgba(255,255,255,0.35);
-            text-decoration: none;
-            margin-left: 24px;
-        }
-
-        .footer-bottom a:hover { color: rgba(255,255,255,0.7); }
-
-        .ic-reg {
-            font-size: 12px;
-            color: rgba(255,255,255,0.25);
-            margin-top: 16px;
-            line-height: 1.6;
-        }
-
-        /* ─── Scroll Animations ─── */
-        .reveal {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ─── Responsive ─── */
-        @media (max-width: 1024px) {
-            .products-grid { grid-template-columns: repeat(3, 1fr); }
-            .features-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-        }
-
-        @media (max-width: 768px) {
-            .nav { display: none; }
-            .mobile-toggle { display: flex; }
-            .hero { height: 480px; }
-
-            .hero-content h1 { font-size: 34px; }
-            .hero-content p { font-size: 15px; }
-            .hero-label { font-size: 10px; }
-
-            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .features-grid { grid-template-columns: 1fr; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .stat-item:nth-child(2) { border-right: none; }
-
-            .section { padding: 56px 0; }
-            .section-header h2 { font-size: 28px; }
-
-            .cta-inner { flex-direction: column; text-align: center; }
-            .cta-text h2 { font-size: 26px; }
-            .cta-actions { justify-content: center; }
-
-            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-
-            .hero-buttons { flex-direction: column; gap: 10px; }
-            .btn { justify-content: center; }
-
-            .top-bar-left { display: none; }
-        }
-
-        @media (max-width: 480px) {
-            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .product-card { padding: 20px 12px 18px; }
-            .product-icon { width: 44px; height: 44px; }
-            .stats-grid { grid-template-columns: 1fr 1fr; }
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Prudential Guarantee — Insurance you can hold to.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy: #0A1F44;
+  --navy-2: #0F2A5C;
+  --red: #E4002B;
+  --red-2: #B80021;
+  --canvas: #F6F2EA;
+  --paper: #FBF8F2;
+  --ink: #14151A;
+  --ink-2: #4A4D58;
+  --line: #1a1a1a14;
+  --gold: #C8A24B;
+  --serif: 'Instrument Serif', 'Times New Roman', serif;
+  --sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --mono: 'Geist Mono', ui-monospace, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--canvas); color: var(--ink); font-family: var(--sans); font-weight: 400; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+img { display: block; max-width: 100%; }
+::selection { background: var(--red); color: #fff; }
+
+.container { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+.eyebrow { font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .18em; color: var(--ink-2); }
+.h-display { font-family: var(--serif); font-weight: 400; font-style: normal; letter-spacing: -0.02em; line-height: .95; }
+.h-italic { font-style: italic; color: var(--red); }
+.rule { height: 1px; background: #0000001a; width: 100%; }
+
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; font-weight: 500; font-size: 14px; letter-spacing: -.01em; transition: transform .15s ease, background .2s ease, color .2s ease; white-space: nowrap; text-decoration: none; }
+.btn-primary { background: var(--red); color: #fff; }
+.btn-primary:hover { background: var(--red-2); }
+.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark:hover { background: #000; }
+.btn-ghost { background: transparent; color: var(--ink); border: 1px solid #0000001f; }
+.btn-ghost:hover { background: #0000000a; }
+.btn-light { background: #fff; color: var(--ink); }
+.btn-light:hover { background: #f5f5f0; }
+.btn:active { transform: scale(.98); }
+
+.tag { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+.tag-red { background: #E4002B14; color: var(--red); }
+.tag-navy { background: #0A1F4414; color: var(--navy); }
+
+@keyframes scroll-x { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ─── Topbar ─── */
+.topbar { background: var(--navy); color: #fff; font-size: 12px; padding: 8px 0; }
+.topbar .container { display: flex; justify-content: space-between; align-items: center; }
+.topbar-left { font-family: var(--mono); font-size: 11px; color: #ffffff60; letter-spacing: .05em; }
+.topbar-right { display: flex; gap: 20px; }
+.topbar-right a { color: #ffffffa0; font-weight: 500; font-size: 12px; transition: color .2s; }
+.topbar-right a:hover { color: #fff; }
+
+/* ─── Header ─── */
+.header { background: var(--paper); border-bottom: 1px solid #0000000a; position: sticky; top: 0; z-index: 100; transition: box-shadow .3s; }
+.header.scrolled { box-shadow: 0 4px 20px #0a1f4410; }
+.header .container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-name { font-family: var(--serif); font-size: 22px; letter-spacing: -.01em; line-height: 1; color: var(--ink); }
+.logo-name i { font-style: italic; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-links a { font-size: 13px; font-weight: 500; color: var(--ink-2); padding: 8px 14px; border-radius: 999px; transition: all .15s; }
+.nav-links a:hover { color: var(--ink); background: #0000000a; }
+.nav-links a.active { color: var(--ink); background: #0000000a; }
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.mobile-menu { display: none; }
+
+/* ─── Hero ─── */
+.hero { position: relative; overflow: hidden; background: var(--navy); }
+.hero-inner { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; }
+.hero-left { display: flex; flex-direction: column; justify-content: center; padding: 80px 0 80px 0; position: relative; z-index: 2; }
+.hero-eyebrow { font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .18em; color: #ffffff50; margin-bottom: 24px; }
+.hero h1 { font-family: var(--serif); font-size: 64px; line-height: .92; letter-spacing: -.03em; color: #fff; font-weight: 400; }
+.hero h1 em { font-style: italic; color: var(--red); }
+.hero-sub { font-size: 17px; color: #ffffffa0; line-height: 1.6; margin-top: 20px; max-width: 420px; }
+.hero-btns { display: flex; gap: 10px; margin-top: 32px; }
+.hero-right { position: relative; display: flex; align-items: center; justify-content: center; }
+.hero-card { background: var(--paper); border-radius: 20px; padding: 32px; width: 380px; position: relative; z-index: 2; box-shadow: 0 30px 80px #0a1f4460; }
+.hero-card h3 { font-family: var(--serif); font-size: 28px; letter-spacing: -.02em; margin-bottom: 4px; color: var(--ink); }
+.hero-card p { font-size: 13px; color: var(--ink-2); margin-bottom: 20px; }
+.hero-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+.hero-card-opt { padding: 12px 14px; border-radius: 10px; border: 1.5px solid #0000001a; background: #fff; text-align: left; display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; transition: all .15s; }
+.hero-card-opt:hover { border-color: var(--red); background: #E4002B08; }
+.hero-card-opt svg { color: var(--navy); flex-shrink: 0; }
+.hero-glow { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, #E4002B20, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; }
+.hero-pattern { position: absolute; inset: 0; opacity: .04; background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 24px 24px; z-index: 0; }
+
+/* ─── Ticker ─── */
+.ticker { background: var(--ink); padding: 14px 0; overflow: hidden; white-space: nowrap; }
+.ticker-track { display: inline-flex; animation: scroll-x 30s linear infinite; }
+.ticker-item { display: inline-flex; align-items: center; gap: 12px; padding: 0 28px; font-size: 13px; font-weight: 500; color: #ffffff90; }
+.ticker-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+
+/* ─── Products ─── */
+.products { padding: 100px 0; }
+.products-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+.products-header h2 { font-family: var(--serif); font-size: 52px; letter-spacing: -.03em; line-height: .95; }
+.products-header h2 em { font-style: italic; color: var(--red); }
+.products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.product-card { background: var(--paper); border: 1px solid #0000000a; border-radius: 16px; padding: 24px; transition: all .25s; cursor: pointer; position: relative; overflow: hidden; }
+.product-card:hover { background: #fff; border-color: #00000014; box-shadow: 0 8px 32px #0a1f4412; transform: translateY(-2px); }
+.product-card:hover .product-arrow { opacity: 1; transform: translateX(0); }
+.product-icon { width: 44px; height: 44px; border-radius: 12px; background: #0A1F440a; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--navy); }
+.product-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+.product-card p { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; }
+.product-arrow { position: absolute; top: 20px; right: 20px; opacity: 0; transform: translateX(-4px); transition: all .25s; color: var(--red); }
+
+/* ─── Stats ─── */
+.stats { padding: 80px 0; border-top: 1px solid #0000000a; border-bottom: 1px solid #0000000a; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+.stat-item { text-align: center; }
+.stat-number { font-family: var(--serif); font-size: 64px; line-height: 1; letter-spacing: -.03em; color: var(--navy); }
+.stat-label { font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .18em; color: var(--ink-2); margin-top: 8px; }
+.stat-sub { font-size: 13px; color: var(--ink-2); margin-top: 6px; line-height: 1.5; }
+
+/* ─── Claims ─── */
+.claims { padding: 100px 0; background: var(--navy); color: #fff; position: relative; overflow: hidden; }
+.claims::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 70% 30%, #0F2A5C, transparent 70%); }
+.claims-inner { position: relative; z-index: 1; }
+.claims h2 { font-family: var(--serif); font-size: 52px; letter-spacing: -.03em; line-height: .95; margin-bottom: 8px; }
+.claims h2 em { font-style: italic; color: #ff6b8a; }
+.claims-sub { font-size: 16px; color: #ffffffa0; max-width: 440px; margin-bottom: 48px; line-height: 1.55; }
+.claims-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.claim-step { background: #ffffff0c; border: 1px solid #ffffff14; border-radius: 16px; padding: 28px; backdrop-filter: blur(4px); }
+.claim-step-num { font-family: var(--mono); font-size: 12px; color: var(--red); font-weight: 500; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.claim-step-num::after { content: ''; flex: 1; height: 1px; background: #ffffff18; }
+.claim-step h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+.claim-step p { font-size: 13px; color: #ffffffa0; line-height: 1.55; }
+.claims-cta { display: flex; gap: 12px; margin-top: 40px; }
+.claims-stat { display: flex; align-items: center; gap: 16px; margin-top: 40px; padding: 20px 24px; background: #ffffff08; border-radius: 12px; border: 1px solid #ffffff10; max-width: 480px; }
+.claims-stat-number { font-family: var(--serif); font-size: 36px; color: var(--red); line-height: 1; white-space: nowrap; }
+.claims-stat-text { font-size: 13px; color: #ffffffa0; line-height: 1.5; }
+
+/* ─── Testimonials ─── */
+.testimonials { padding: 100px 0; }
+.testimonials h2 { font-family: var(--serif); font-size: 52px; letter-spacing: -.03em; line-height: .95; text-align: center; margin-bottom: 48px; }
+.testimonials h2 em { font-style: italic; color: var(--red); }
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.testimonial-card { background: var(--paper); border: 1px solid #0000000a; border-radius: 16px; padding: 28px; }
+.testimonial-stars { color: var(--gold); display: flex; gap: 2px; margin-bottom: 14px; }
+.testimonial-text { font-size: 15px; line-height: 1.6; color: var(--ink); margin-bottom: 18px; }
+.testimonial-author { display: flex; align-items: center; gap: 12px; }
+.testimonial-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; font-weight: 600; }
+.testimonial-name { font-size: 13px; font-weight: 600; }
+.testimonial-role { font-size: 11px; color: var(--ink-2); font-family: var(--mono); }
+
+/* ─── FAQ ─── */
+.faq { padding: 100px 0; background: var(--paper); border-top: 1px solid #0000000a; }
+.faq-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; }
+.faq h2 { font-family: var(--serif); font-size: 44px; letter-spacing: -.02em; line-height: .95; }
+.faq h2 em { font-style: italic; color: var(--red); }
+.faq-list { display: flex; flex-direction: column; }
+.faq-item { border-bottom: 1px solid #0000000a; }
+.faq-q { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; font-size: 15px; font-weight: 500; cursor: pointer; width: 100%; text-align: left; }
+.faq-q svg { flex-shrink: 0; transition: transform .2s; color: var(--ink-2); }
+.faq-q.open svg { transform: rotate(45deg); }
+.faq-a { font-size: 14px; color: var(--ink-2); line-height: 1.6; padding-bottom: 20px; display: none; }
+.faq-a.open { display: block; }
+
+/* ─── CTA ─── */
+.cta { padding: 100px 0; text-align: center; }
+.cta h2 { font-family: var(--serif); font-size: 56px; letter-spacing: -.03em; line-height: .92; margin-bottom: 16px; }
+.cta h2 em { font-style: italic; color: var(--red); }
+.cta p { font-size: 17px; color: var(--ink-2); max-width: 480px; margin: 0 auto 32px; line-height: 1.6; }
+.cta-btns { display: flex; gap: 10px; justify-content: center; }
+
+/* ─── Footer ─── */
+.footer { background: var(--navy); color: #fff; padding: 64px 0 0; }
+.footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 48px; }
+.footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.footer-brand-name { font-family: var(--serif); font-size: 20px; }
+.footer-brand-name i { font-style: italic; }
+.footer-desc { font-size: 13px; color: #ffffff70; line-height: 1.6; margin-bottom: 16px; }
+.footer-contact { font-size: 13px; color: #ffffff70; line-height: 1.8; }
+.footer h4 { font: 600 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .14em; color: #ffffff50; margin-bottom: 18px; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 8px; }
+.footer-links a { font-size: 13px; color: #ffffffa0; transition: color .2s; }
+.footer-links a:hover { color: #fff; }
+.footer-bottom { border-top: 1px solid #ffffff10; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #ffffff40; }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { color: #ffffff40; font-size: 11px; }
+.footer-bottom-links a:hover { color: #ffffffa0; }
+.footer-ic { font-size: 11px; color: #ffffff30; margin-top: 12px; }
+
+/* ─── Modal ─── */
+.modal-overlay { position: fixed; inset: 0; z-index: 1000; background: #0A1F4488; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 24px; animation: fade .2s ease; }
+.modal-content { width: 100%; max-width: 760px; background: var(--paper); border-radius: 20px; overflow: hidden; box-shadow: 0 30px 80px #0a1f4440; animation: pop .25s cubic-bezier(.2,.7,.3,1.3); }
+.modal-grid { display: grid; grid-template-columns: 260px 1fr; min-height: 520px; }
+.modal-rail { background: var(--navy); color: #fff; padding: 28px 24px; display: flex; flex-direction: column; }
+.modal-body { padding: 32px; display: flex; flex-direction: column; }
+.modal-close { color: #ffffff80; cursor: pointer; background: none; border: 0; }
+
+/* ─── Quote form elements ─── */
+.form-field { display: block; margin-bottom: 14px; }
+.form-label { display: block; font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--ink-2); margin-bottom: 6px; }
+.form-input { width: 100%; padding: 12px 14px; border: 1px solid #0000001f; border-radius: 10px; font-size: 14px; font-family: var(--sans); background: #fff; outline: none; }
+.form-input:focus { border-color: var(--red); }
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .hero h1 { font-size: 48px; }
+  .products-grid { grid-template-columns: repeat(3, 1fr); }
+  .products-header h2, .claims h2, .testimonials h2, .cta h2 { font-size: 40px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .stat-number { font-size: 48px; }
+  .footer-grid { grid-template-columns: repeat(3, 1fr); }
+  .faq-inner { grid-template-columns: 1fr; gap: 32px; }
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-actions { display: none; }
+  .mobile-menu { display: flex; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-left { padding: 60px 0 40px; }
+  .hero h1 { font-size: 38px; }
+  .hero-right { padding-bottom: 60px; }
+  .hero-card { width: 100%; max-width: 380px; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .claims-steps { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+  .modal-grid { grid-template-columns: 1fr; }
+  .modal-rail { padding: 20px 24px; }
+  .cta h2 { font-size: 34px; }
+  .topbar-left { display: none; }
+}
+
+@media (max-width: 480px) {
+  .products-grid { grid-template-columns: 1fr; }
+  .hero-card-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 32px; }
+  .hero-btns { flex-direction: column; }
+  .btn { justify-content: center; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="top-bar-left">IC Registration No. 2019/01</div>
-            <div class="top-bar-right">
-                <a href="#">Press</a>
-                <a href="#">Find a Branch</a>
-                <a href="#">Contact Us</a>
-            </div>
-        </div>
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">IC Registration No. 2019/01 &mdash; Supervised by the Insurance Commission</div>
+    <div class="topbar-right">
+      <a href="#">Press</a>
+      <a href="#">Find a Branch</a>
+      <a href="#">Contact</a>
     </div>
+  </div>
+</div>
 
-    <!-- Header -->
-    <header class="header" id="header">
-        <div class="container">
-            <a href="#" class="logo">
-                <div class="logo-mark">
-                    <svg viewBox="0 0 44 44" fill="none">
-                        <rect width="44" height="44" rx="6" fill="#0a1e3d"/>
-                        <path d="M12 14h6c3.3 0 6 2.7 6 6s-2.7 6-6 6h-6v-12z" stroke="#c9a84c" stroke-width="1.8"/>
-                        <path d="M18 14v12" stroke="#c9a84c" stroke-width="1.2" opacity="0.4"/>
-                        <path d="M26 14v12" stroke="#c9a84c" stroke-width="1.8"/>
-                        <path d="M26 14h4.5" stroke="#c9a84c" stroke-width="1.8"/>
-                        <path d="M26 20h3.5" stroke="#c9a84c" stroke-width="1.8"/>
-                        <rect x="10" y="30" width="24" height="1.2" rx="0.6" fill="#c9a84c" opacity="0.3"/>
-                    </svg>
-                </div>
-                <div class="logo-text">
-                    <div class="brand">Prudential Guarantee</div>
-                    <div class="tagline">Insuring Growth</div>
-                </div>
-            </a>
-            <nav class="nav">
-                <a href="#" class="active">Home</a>
-                <a href="#">About Us</a>
-                <a href="#products">Products</a>
-                <a href="#">Claims</a>
-                <a href="#">Contact Us</a>
-            </nav>
-            <button class="mobile-toggle" aria-label="Menu">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
-                    <line x1="3" y1="5" x2="17" y2="5"/>
-                    <line x1="3" y1="10" x2="17" y2="10"/>
-                    <line x1="3" y1="15" x2="17" y2="15"/>
-                </svg>
+<!-- Header -->
+<header class="header" id="header">
+  <div class="container">
+    <a href="#" class="logo">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+        <path d="M16 2 L28 6 V16 C28 23 22 28.5 16 30 C10 28.5 4 23 4 16 V6 Z" fill="var(--navy)" opacity=".08"/>
+        <path d="M16 2 L28 6 V16 C28 23 22 28.5 16 30 C10 28.5 4 23 4 16 V6 Z" stroke="var(--navy)" stroke-width="1.4"/>
+        <path d="M11 11 H17.5 C19.4 11 21 12.6 21 14.5 C21 16.4 19.4 18 17.5 18 H14 V23 H11 Z" fill="var(--navy)"/>
+        <circle cx="14" cy="14.5" r="1.2" fill="#E4002B"/>
+      </svg>
+      <span class="logo-name">Prudential <i>Guarantee</i></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#" class="active">Home</a>
+      <a href="#products">Products</a>
+      <a href="#claims">Claims</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#" class="btn btn-ghost" style="padding:10px 18px;font-size:13px" onclick="openQuote(); return false;">Get a Quote</a>
+      <a href="#" class="btn btn-primary" style="padding:10px 18px;font-size:13px" onclick="openClaim(); return false;">File a Claim</a>
+    </div>
+    <button class="mobile-menu" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">SINCE 1960 &bull; NON-LIFE INSURANCE</div>
+        <h1>Insurance you can <em>hold to.</em></h1>
+        <p class="hero-sub">Sixty years of protecting Filipino families and businesses. Comprehensive non-life coverage with claims settled in days, not weeks.</p>
+        <div class="hero-btns">
+          <a href="#" class="btn btn-primary" onclick="openQuote(); return false;">Get a Free Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#products" class="btn btn-light">Explore Products</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-glow"></div>
+        <div class="hero-card">
+          <div class="tag tag-red" style="margin-bottom:14px"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6z"/></svg> QUICK QUOTE</div>
+          <h3>What are we protecting?</h3>
+          <p>Choose a product to get an instant estimate.</p>
+          <div class="hero-card-grid">
+            <button class="hero-card-opt" onclick="openQuote()">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2-6h14l2 6"/><rect x="2" y="13" width="20" height="6" rx="1.5"/><circle cx="7" cy="19" r="1.5" fill="currentColor"/><circle cx="17" cy="19" r="1.5" fill="currentColor"/></svg>
+              Motor
             </button>
+            <button class="hero-card-opt" onclick="openQuote()">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg>
+              Home & Fire
+            </button>
+            <button class="hero-card-opt" onclick="openQuote()">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16l8-3 4-9 2 1-1 8 7 3-1 2-8-2-4 6-2-1 1-4z"/></svg>
+              Travel
+            </button>
+            <button class="hero-card-opt" onclick="openQuote()">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+              All Products
+            </button>
+          </div>
+          <button class="btn btn-dark" style="width:100%;justify-content:center" onclick="openQuote()">Start Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
-    </header>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-slide active">
-            <div class="hero-pattern"></div>
-            <div class="hero-content">
-                <div class="hero-label">Since 1960</div>
-                <h1>Protecting What Matters Most</h1>
-                <p>For over six decades, Prudential Guarantee has been a trusted partner in safeguarding Filipino families and businesses.</p>
-                <div class="hero-buttons">
-                    <a href="#products" class="btn btn-gold">Explore Products</a>
-                    <a href="#" class="btn btn-ghost">Contact Us</a>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slide">
-            <div class="hero-pattern"></div>
-            <div class="hero-content">
-                <div class="hero-label">Travel Insurance</div>
-                <h1>Travel Shield Coverage</h1>
-                <p>Travel with confidence. Comprehensive protection for medical emergencies, trip cancellations, and lost baggage worldwide.</p>
-                <div class="hero-buttons">
-                    <a href="#" class="btn btn-gold">Learn More</a>
-                    <a href="#" class="btn btn-ghost">Get a Quote</a>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slide">
-            <div class="hero-pattern"></div>
-            <div class="hero-content">
-                <div class="hero-label">Accident Protection</div>
-                <h1>Acci-Shield+ Insurance</h1>
-                <p>Stay protected against accidents and dengue with our comprehensive Acci-Shield+ plan designed for Filipino families.</p>
-                <div class="hero-buttons">
-                    <a href="#" class="btn btn-gold">Learn More</a>
-                    <a href="#" class="btn btn-ghost">Contact Us</a>
-                </div>
-            </div>
-        </div>
-        <div class="hero-nav">
-            <button class="active" onclick="goToSlide(0)"></button>
-            <button onclick="goToSlide(1)"></button>
-            <button onclick="goToSlide(2)"></button>
-        </div>
-    </section>
+<!-- Ticker -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot"></span> Motor Insurance</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Home & Fire</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Travel Shield</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Personal Accident</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Marine Cargo</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Engineering All Risk</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Suretyship & Bonds</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Aviation</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Casualty</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Financial Lines</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Works of Art</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Motor Insurance</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Home & Fire</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Travel Shield</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Personal Accident</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Marine Cargo</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Engineering All Risk</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Suretyship & Bonds</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Aviation</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Casualty</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Financial Lines</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Works of Art</span>
+  </div>
+</div>
 
-    <!-- Stats Bar -->
-    <section class="stats-bar reveal">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">60+</div>
-                    <div class="stat-label">Years of Service</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">Insurance Lines</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">30+</div>
-                    <div class="stat-label">Branches Nationwide</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">500K+</div>
-                    <div class="stat-label">Policies Issued</div>
-                </div>
-            </div>
+<!-- Products -->
+<section class="products" id="products">
+  <div class="container">
+    <div class="products-header reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom:12px">INSURANCE SOLUTIONS</div>
+        <h2>Coverage built for <em>real life.</em></h2>
+      </div>
+      <a href="#" class="btn btn-ghost">View all products <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="products-grid">
+      <div class="product-card reveal">
+        <div class="product-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2-6h14l2 6"/><rect x="2" y="13" width="20" height="6" rx="1.5"/><circle cx="7" cy="19" r="1.5" fill="currentColor"/><circle cx="17" cy="19" r="1.5" fill="currentColor"/></svg></div>
+        <span class="product-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        <h3>Motor Insurance</h3>
+        <p>Comprehensive and third-party liability coverage for all vehicle types.</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></div>
+        <span class="product-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        <h3>Home & Property</h3>
+        <p>Protect your home against fire, natural disasters, and theft.</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16l8-3 4-9 2 1-1 8 7 3-1 2-8-2-4 6-2-1 1-4z"/></svg></div>
+        <span class="product-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        <h3>Travel Shield</h3>
+        <p>Medical, cancellation, and baggage coverage for worry-free trips.</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.5-9 9-9 9z"/></svg></div>
+        <span class="product-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        <h3>Acci-Shield+</h3>
+        <p>Personal accident and dengue protection for the whole family.</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17c2 1.5 3 1.5 4.5 0S10 15.5 12 17s2.5 1.5 4.5 0S19 15.5 21 17"/><path d="M5 14l1-5h12l1 5"/><path d="M12 4v5"/><path d="M9 6h6"/></svg></div>
+        <span class="product-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        <h3>Marine Cargo</h3>
+        <p>Inland and ocean cargo coverage for goods in transit.</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-3 3-6-6z"/><path d="M11 7L4 14l3 3 7-7"/><path d="M3 21h8"/></svg></div>
+        <span class="product-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        <h3>Engineering</h3>
+        <p>All-risk coverage for construction, erection, and machinery projects.</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v4h4"/><path d="M10 12h6M10 16h4"/></svg></div>
+        <span class="product-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        <h3>Suretyship & Bonds</h3>
+        <p>Bid, performance, and guarantee bonds for contractors and businesses.</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <span class="product-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        <h3>Casualty & Liability</h3>
+        <p>General liability, professional indemnity, and directors & officers cover.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats reveal" id="about">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number" data-count="64">0</div>
+        <div class="stat-label">Years of Service</div>
+        <div class="stat-sub">Established in 1960, one of the Philippines' most trusted non-life insurers.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="30" data-suffix="+">0</div>
+        <div class="stat-label">Branches Nationwide</div>
+        <div class="stat-sub">From Metro Manila to Mindanao, always close to where you are.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="15">0</div>
+        <div class="stat-label">Insurance Lines</div>
+        <div class="stat-sub">Comprehensive non-life coverage spanning motor to marine, bonds to aviation.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="98" data-suffix="%">0</div>
+        <div class="stat-label">Claims Satisfaction</div>
+        <div class="stat-sub">Industry-leading claims turnaround with dedicated case officers.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Claims -->
+<section class="claims" id="claims">
+  <div class="container claims-inner">
+    <div class="reveal">
+      <div class="eyebrow" style="color:#ffffff50;margin-bottom:12px">CLAIMS PROCESS</div>
+      <h2>We're here. <em>Right now.</em></h2>
+      <p class="claims-sub">Filing a claim shouldn't add stress. Our streamlined process gets you from incident to resolution as fast as possible.</p>
+    </div>
+    <div class="claims-steps reveal">
+      <div class="claim-step">
+        <div class="claim-step-num">STEP 01</div>
+        <h3>Report the Incident</h3>
+        <p>File online, call our 24/7 hotline, or walk into any branch. We're available when you need us.</p>
+      </div>
+      <div class="claim-step">
+        <div class="claim-step-num">STEP 02</div>
+        <h3>Assessment & Review</h3>
+        <p>A dedicated claims officer reviews your case within 24 hours. We handle the paperwork so you don't have to.</p>
+      </div>
+      <div class="claim-step">
+        <div class="claim-step-num">STEP 03</div>
+        <h3>Settlement</h3>
+        <p>Once approved, receive your settlement promptly. Most claims are resolved within 10 business days.</p>
+      </div>
+    </div>
+    <div class="claims-stat reveal">
+      <div class="claims-stat-number">11 min</div>
+      <div class="claims-stat-text">Average first response time. A senior claims officer will reach you on the channel you prefer.</div>
+    </div>
+    <div class="claims-cta reveal">
+      <a href="#" class="btn btn-primary" onclick="openClaim(); return false;">File a Claim Now <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#" class="btn" style="color:#ffffffa0;border:1px solid #ffffff20">Call (02) 8845-1111</a>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials reveal">
+  <div class="container">
+    <div class="eyebrow" style="text-align:center;margin-bottom:12px">WHAT CLIENTS SAY</div>
+    <h2>Trusted by <em>thousands.</em></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
         </div>
-    </section>
-
-    <!-- Products -->
-    <section class="section" id="products">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="overline">Insurance Solutions</div>
-                <h2>Our Products</h2>
-                <p>Comprehensive non-life insurance coverage designed for individuals and businesses across the Philippines.</p>
-            </div>
-            <div class="products-grid">
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    </div>
-                    <h3>Acci-Shield+</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><rect x="1" y="7" width="22" height="12" rx="2"/><circle cx="12" cy="13" r="3"/><path d="M5 7V5a2 2 0 012-2h10a2 2 0 012 2v2"/></svg>
-                    </div>
-                    <h3>Auto Insurance</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.4-.1.9.3 1.1l5.3 3.2-2.4 2.4-2 .2c-.3 0-.6.2-.7.5l-.2.5c-.1.3 0 .7.3.9l2.6 1.4 1.4 2.6c.2.3.5.4.9.3l.5-.2c.3-.1.5-.4.5-.7l.2-2 2.4-2.4 3.2 5.3c.2.4.7.5 1.1.3l.5-.3c.4-.2.6-.6.5-1.1z"/></svg>
-                    </div>
-                    <h3>Aviation Insurance</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    </div>
-                    <h3>Casualty Insurance</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-                    </div>
-                    <h3>Engineering Insurance</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-                    </div>
-                    <h3>Financial Lines</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    </div>
-                    <h3>Home Guard</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/><path d="M9 20v-4h6v4"/><path d="M3 20l9-14 9 14"/></svg>
-                    </div>
-                    <h3>Marine Insurance</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-                    </div>
-                    <h3>Family Accident</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    </div>
-                    <h3>Personal Accident</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M9 3v18"/><path d="M2 9h7"/><path d="M2 15h7"/></svg>
-                    </div>
-                    <h3>Property Insurance</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                    </div>
-                    <h3>Suretyship / Bonds</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-                    </div>
-                    <h3>Travel Insurance</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    </div>
-                    <h3>Works of Art</h3>
-                </a>
-                <a href="#" class="product-card reveal">
-                    <div class="product-icon">
-                        <svg viewBox="0 0 24 24"><rect x="1" y="7" width="22" height="12" rx="2"/><circle cx="12" cy="13" r="3"/><path d="M12 7v-2"/><path d="M7 7V4"/><path d="M17 7V4"/></svg>
-                    </div>
-                    <h3>Auto Passenger Protector</h3>
-                </a>
-            </div>
+        <p class="testimonial-text">"Filed a motor claim after a minor fender-bender. The claims officer called me within 15 minutes and the whole thing was settled in 5 business days. Exceptional service."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RC</div>
+          <div>
+            <div class="testimonial-name">Roberto C.</div>
+            <div class="testimonial-role">Motor Insurance &bull; Makati</div>
+          </div>
         </div>
-    </section>
-
-    <!-- Features -->
-    <section class="section features-section">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="overline">Why Choose Us</div>
-                <h2>Built on Trust, Driven by Service</h2>
-                <p>One of the most established non-life insurance companies in the Philippines.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card reveal">
-                    <div class="feature-number">01</div>
-                    <h3>Six Decades of Excellence</h3>
-                    <p>Established in 1960, Prudential Guarantee is one of the most trusted non-life insurers in the Philippines, with a proven track record of stability and service.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-number">02</div>
-                    <h3>Financial Strength</h3>
-                    <p>Backed by strong financial fundamentals and consistently rated among the top non-life insurers, ensuring that claims are settled promptly and reliably.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-number">03</div>
-                    <h3>Client-First Philosophy</h3>
-                    <p>Dedicated to providing personalized service and comprehensive coverage solutions that are carefully tailored to each client's unique needs.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-number">04</div>
-                    <h3>Nationwide Presence</h3>
-                    <p>With over 30 branches across the Philippines, we maintain close proximity to our clients, ensuring accessible service wherever they are.</p>
-                </div>
-            </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
         </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-inner reveal">
-                <div class="cta-text">
-                    <h2>Need Help Choosing the Right Coverage?</h2>
-                    <p>Our insurance professionals are ready to help you find the perfect plan. Speak with an advisor or chat with us now.</p>
-                </div>
-                <div class="cta-actions">
-                    <a href="#" class="btn btn-gold">Get a Quote</a>
-                    <a href="#" class="btn btn-ghost">Find a Branch</a>
-                </div>
-            </div>
+        <p class="testimonial-text">"We insure our entire fleet of 40+ trucks with Prudential Guarantee. Their corporate team understands logistics and gives us coverage that actually fits our operations."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">ML</div>
+          <div>
+            <div class="testimonial-name">Maria L.</div>
+            <div class="testimonial-role">Fleet Manager &bull; Cebu</div>
+          </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="brand-name">Prudential Guarantee and Assurance, Inc.</div>
-                    <div class="brand-tagline">Insuring Growth</div>
-                    <p>Prudential Guarantee Building<br>1002 Arnaiz Ave. cor. Paseo De Roxas<br>Makati City, Philippines 1226</p>
-                    <div class="footer-contact">
-                        <p>Tel: (02) 8812-1800</p>
-                        <p>Email: info@prudentialguarantee.com</p>
-                    </div>
-                    <div class="ic-reg">Supervised by the Insurance Commission</div>
-                </div>
-                <div>
-                    <h4>Company</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Our Story</a></li>
-                        <li><a href="#">Our Team</a></li>
-                        <li><a href="#">Corporate Governance</a></li>
-                        <li><a href="#">Financial Statements</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Products</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Auto Insurance</a></li>
-                        <li><a href="#">Property Insurance</a></li>
-                        <li><a href="#">Travel Insurance</a></li>
-                        <li><a href="#">Marine Insurance</a></li>
-                        <li><a href="#">Suretyship / Bonds</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Support</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">File a Claim</a></li>
-                        <li><a href="#">Find a Branch</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Corporate Documents</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <span>&copy; 2024 Prudential Guarantee and Assurance, Inc. All rights reserved.</span>
-                <div>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Use</a>
-                </div>
-            </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>
         </div>
-    </footer>
+        <p class="testimonial-text">"Travel Shield saved our Japan trip. When my wife got sick in Osaka, the 24/7 hotline connected us with a hospital in minutes. All medical bills were covered without any hassle."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JD</div>
+          <div>
+            <div class="testimonial-name">James D.</div>
+            <div class="testimonial-role">Travel Insurance &bull; Quezon City</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Hero carousel
-        let current = 0;
-        const slides = document.querySelectorAll('.hero-slide');
-        const navBtns = document.querySelectorAll('.hero-nav button');
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-inner reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom:12px">FAQ</div>
+        <h2>Common <em>questions.</em></h2>
+        <p style="color:var(--ink-2);font-size:15px;line-height:1.6;margin-top:14px;max-width:320px">Can't find what you're looking for? Our team is always happy to help.</p>
+        <a href="#" class="btn btn-dark" style="margin-top:20px">Contact Support <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How do I file a claim? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-a">You can file a claim online through our website, call our 24/7 claims hotline at (02) 8845-1111, or visit any of our 30+ branches nationwide. A dedicated claims officer will be assigned to your case within hours.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How long does claims processing take? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-a">Most claims are processed and settled within 10 business days from receipt of complete documents. Our average first response time is 11 minutes, and we keep you updated throughout the process.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What types of insurance do you offer? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-a">We offer 15+ lines of non-life insurance including Motor, Home & Fire, Travel, Personal Accident, Marine Cargo, Engineering All Risk, Suretyship & Bonds, Aviation, Casualty & Liability, Financial Lines, and Works of Art insurance.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I get a quote online? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-a">Yes! Use our Quick Quote tool to get an instant indicative premium estimate. Simply choose a product, provide some basic information, and receive a quote in under 60 seconds. Final premiums are subject to underwriting.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Where are your branches located? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-a">We have 30+ branches across the Philippines, from Metro Manila to key cities in Luzon, Visayas, and Mindanao. Visit our branches page to find the location nearest you.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        function goToSlide(n) {
-            slides[current].classList.remove('active');
-            navBtns[current].classList.remove('active');
-            current = n;
-            slides[current].classList.add('active');
-            navBtns[current].classList.add('active');
+<!-- CTA -->
+<section class="cta reveal">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:12px">GET STARTED</div>
+    <h2>Ready to be <em>covered?</em></h2>
+    <p>Get an instant quote, speak with an advisor, or chat with us online. Protecting what matters starts with one step.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn btn-primary" onclick="openQuote(); return false;">Get a Free Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#" class="btn btn-ghost">Find a Branch</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+            <path d="M16 2 L28 6 V16 C28 23 22 28.5 16 30 C10 28.5 4 23 4 16 V6 Z" fill="#fff" opacity=".08"/>
+            <path d="M16 2 L28 6 V16 C28 23 22 28.5 16 30 C10 28.5 4 23 4 16 V6 Z" stroke="#fff" stroke-width="1.4"/>
+            <path d="M11 11 H17.5 C19.4 11 21 12.6 21 14.5 C21 16.4 19.4 18 17.5 18 H14 V23 H11 Z" fill="#fff"/>
+            <circle cx="14" cy="14.5" r="1.2" fill="#E4002B"/>
+          </svg>
+          <span class="footer-brand-name">Prudential <i>Guarantee</i></span>
+        </div>
+        <p class="footer-desc">Prudential Guarantee and Assurance, Inc. One of the Philippines' most established non-life insurance companies, serving clients since 1960.</p>
+        <div class="footer-contact">
+          Prudential Guarantee Building<br>
+          1002 Arnaiz Ave. cor. Paseo De Roxas<br>
+          Makati City, Philippines 1226<br><br>
+          Tel: (02) 8812-1800<br>
+          Claims: (02) 8845-1111<br>
+          Email: info@prudentialguarantee.com
+        </div>
+        <div class="footer-ic">Supervised by the Insurance Commission</div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Leadership Team</a></li>
+          <li><a href="#">Corporate Governance</a></li>
+          <li><a href="#">Financial Statements</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul class="footer-links">
+          <li><a href="#">Motor Insurance</a></li>
+          <li><a href="#">Home & Fire</a></li>
+          <li><a href="#">Travel Shield</a></li>
+          <li><a href="#">Personal Accident</a></li>
+          <li><a href="#">Marine Cargo</a></li>
+          <li><a href="#">Suretyship & Bonds</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Claims</h4>
+        <ul class="footer-links">
+          <li><a href="#">File a Claim</a></li>
+          <li><a href="#">Track a Claim</a></li>
+          <li><a href="#">Claims FAQ</a></li>
+          <li><a href="#">24/7 Hotline</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul class="footer-links">
+          <li><a href="#">Find a Branch</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Corporate Documents</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024 Prudential Guarantee and Assurance, Inc. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Quote Modal -->
+<div class="modal-overlay" id="quoteModal" style="display:none" onclick="closeQuote()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-grid">
+      <aside class="modal-rail">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <span class="eyebrow" style="color:#ffffff80">Get a quote</span>
+          <button class="modal-close" onclick="closeQuote()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        </div>
+        <h3 class="h-display" style="font-size:34px;margin-top:18px;color:#fff">
+          Let's get you <span style="font-style:italic;color:#ff6b8a">covered.</span>
+        </h3>
+        <p style="font-size:13px;color:#ffffffb0;margin-top:10px;line-height:1.5">
+          Answer a few quick questions. Get an indicative premium in under 60 seconds.
+        </p>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:14px">
+          <div id="step-indicator"></div>
+        </div>
+      </aside>
+      <section class="modal-body" id="quoteBody"></section>
+    </div>
+  </div>
+</div>
+
+<!-- Claim Modal -->
+<div class="modal-overlay" id="claimModal" style="display:none" onclick="closeClaim()">
+  <div class="modal-content" style="max-width:520px" onclick="event.stopPropagation()">
+    <div style="padding:28px">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <span class="tag tag-red"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6z"/></svg> FILE A CLAIM</span>
+        <button onclick="closeClaim()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <h3 class="h-display" style="font-size:36px;margin-top:14px;letter-spacing:-.02em">
+        We're here. <span style="font-style:italic;color:var(--red)">Right now.</span>
+      </h3>
+      <p style="color:var(--ink-2);font-size:14px;margin-top:8px;line-height:1.55">
+        Average first response: <strong style="color:var(--ink)">11 minutes</strong>. A senior claims officer will reach you on the channel you prefer.
+      </p>
+      <div style="margin-top:22px;display:grid;gap:14px">
+        <label class="form-field">
+          <span class="form-label">Policy number</span>
+          <input class="form-input" placeholder="PG-2025-0000-0000"/>
+        </label>
+        <label class="form-field">
+          <span class="form-label">What happened?</span>
+          <select class="form-input">
+            <option>Motor accident / damage</option>
+            <option>Property fire or damage</option>
+            <option>Health / accident</option>
+            <option>Travel disruption</option>
+            <option>Marine cargo</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label class="form-field">
+          <span class="form-label">How urgent?</span>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+            <button class="hero-card-opt" style="justify-content:center;font-size:13px">Now</button>
+            <button class="hero-card-opt" style="justify-content:center;font-size:13px">Today</button>
+            <button class="hero-card-opt" style="justify-content:center;font-size:13px">This week</button>
+          </div>
+        </label>
+        <button class="btn btn-primary" style="justify-content:center" onclick="closeClaim()">
+          Connect me with a claims officer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <div style="text-align:center;font-size:12px;color:var(--ink-2)">
+          Or call <strong style="color:var(--ink)">(02) 8845-1111</strong> &mdash; 24/7
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Header scroll
+window.addEventListener('scroll', function() {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+});
+
+// Scroll reveal
+var reveals = document.querySelectorAll('.reveal');
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(function(el) { observer.observe(el); });
+
+// Number counter
+var counted = false;
+var statObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting && !counted) {
+      counted = true;
+      document.querySelectorAll('.stat-number[data-count]').forEach(function(el) {
+        var target = parseInt(el.dataset.count);
+        var suffix = el.dataset.suffix || '';
+        var start = performance.now();
+        var duration = 1200;
+        function tick(now) {
+          var t = Math.min(1, (now - start) / duration);
+          var eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(eased * target) + suffix;
+          if (t < 1) requestAnimationFrame(tick);
         }
+        requestAnimationFrame(tick);
+      });
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.stats').forEach(function(el) { statObserver.observe(el); });
 
-        setInterval(function() {
-            goToSlide((current + 1) % slides.length);
-        }, 6000);
+// FAQ toggle
+function toggleFaq(btn) {
+  var answer = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.faq-q').forEach(function(q) { q.classList.remove('open'); });
+  document.querySelectorAll('.faq-a').forEach(function(a) { a.classList.remove('open'); });
+  if (!isOpen) {
+    btn.classList.add('open');
+    answer.classList.add('open');
+  }
+}
 
-        // Sticky header shadow
-        window.addEventListener('scroll', function() {
-            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
-        });
+// Modals
+function openQuote() { document.getElementById('quoteModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+function closeQuote() { document.getElementById('quoteModal').style.display = 'none'; document.body.style.overflow = ''; }
+function openClaim() { document.getElementById('claimModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+function closeClaim() { document.getElementById('claimModal').style.display = 'none'; document.body.style.overflow = ''; }
 
-        // Scroll reveal
-        var reveals = document.querySelectorAll('.reveal');
-        var observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeQuote(); closeClaim(); }
+});
+</script>
 
-        reveals.forEach(function(el) { observer.observe(el); });
-    </script>
-
-    <!-- Tenext Chatbot Widget -->
-    <script src="https://staging.brain.tenext.ai/static/chat/widget/embed.js"
-        data-widget-id="wid_07a16a6c9d7e6a3432158bb1"></script>
+<!-- Tenext Chatbot Widget -->
+<script src="https://staging.brain.tenext.ai/static/chat/widget/embed.js"
+    data-widget-id="wid_07a16a6c9d7e6a3432158bb1"></script>
 </body>
 </html>
