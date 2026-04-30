@@ -4,504 +4,779 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prudential Guarantee and Assurance, Inc. | Insuring Growth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
+        :root {
+            --navy: #0a1e3d;
+            --navy-mid: #102a4a;
+            --blue: #1a5276;
+            --blue-accent: #2980b9;
+            --gold: #c9a84c;
+            --gold-light: #dfc373;
+            --cream: #faf8f4;
+            --white: #ffffff;
+            --gray-50: #f8f9fa;
+            --gray-100: #f0f1f3;
+            --gray-200: #e2e4e8;
+            --gray-400: #9ca3af;
+            --gray-600: #5a6577;
+            --gray-800: #2d3748;
+            --serif: 'DM Serif Display', Georgia, serif;
+            --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --shadow-sm: 0 1px 3px rgba(10,30,61,0.06);
+            --shadow-md: 0 4px 16px rgba(10,30,61,0.08);
+            --shadow-lg: 0 12px 40px rgba(10,30,61,0.12);
+            --radius: 6px;
+        }
+
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            background: #fff;
+            font-family: var(--sans);
+            color: var(--gray-800);
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        /* Top Bar */
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ─── Top Bar ─── */
         .top-bar {
-            background: #003366;
-            color: #fff;
-            font-size: 13px;
-            padding: 6px 0;
+            background: var(--navy);
+            padding: 8px 0;
+            font-size: 12px;
+            letter-spacing: 0.3px;
         }
 
         .top-bar .container {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
-            gap: 20px;
+        }
+
+        .top-bar-left {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .top-bar-right {
+            display: flex;
+            gap: 24px;
         }
 
         .top-bar a {
-            color: #cdd9e5;
+            color: rgba(255,255,255,0.6);
             text-decoration: none;
             transition: color 0.2s;
+            font-weight: 500;
         }
 
-        .top-bar a:hover {
-            color: #fff;
-        }
+        .top-bar a:hover { color: var(--gold-light); }
 
-        /* Header / Navbar */
+        /* ─── Header ─── */
         .header {
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: box-shadow 0.3s;
+        }
+
+        .header.scrolled {
+            box-shadow: var(--shadow-md);
         }
 
         .header .container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-            height: 70px;
+            height: 72px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             text-decoration: none;
         }
 
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #003366, #00669e);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 800;
-            font-size: 20px;
-            letter-spacing: -1px;
+        .logo-mark {
+            width: 44px;
+            height: 44px;
+            position: relative;
         }
 
-        .logo-text {
-            line-height: 1.2;
+        .logo-mark svg {
+            width: 100%;
+            height: 100%;
         }
 
         .logo-text .brand {
-            font-size: 18px;
-            font-weight: 700;
-            color: #003366;
+            font-family: var(--serif);
+            font-size: 20px;
+            color: var(--navy);
+            line-height: 1.1;
         }
 
         .logo-text .tagline {
-            font-size: 11px;
-            color: #00669e;
-            letter-spacing: 1.5px;
+            font-size: 10.5px;
+            color: var(--gold);
+            letter-spacing: 2.5px;
             text-transform: uppercase;
+            font-weight: 600;
+            margin-top: 1px;
         }
 
         .nav {
             display: flex;
             align-items: center;
-            gap: 0;
+            gap: 2px;
         }
 
         .nav a {
             text-decoration: none;
-            color: #003366;
-            font-size: 14px;
+            color: var(--gray-600);
+            font-size: 13.5px;
             font-weight: 600;
-            padding: 24px 16px;
-            transition: color 0.2s, background 0.2s;
-            position: relative;
+            padding: 8px 18px;
+            border-radius: var(--radius);
+            transition: all 0.2s;
+            letter-spacing: 0.2px;
         }
 
         .nav a:hover {
-            color: #00669e;
-            background: #f0f6fc;
+            color: var(--navy);
+            background: var(--gray-50);
         }
 
         .nav a.active {
-            color: #00669e;
+            color: var(--navy);
+            background: var(--gray-100);
         }
 
-        .nav a.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 16px;
-            right: 16px;
-            height: 3px;
-            background: #00669e;
-            border-radius: 2px 2px 0 0;
-        }
-
-        .mobile-menu-btn {
+        .mobile-toggle {
             display: none;
             background: none;
-            border: none;
-            font-size: 24px;
-            color: #003366;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+            padding: 8px;
             cursor: pointer;
+            color: var(--navy);
         }
 
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Hero Carousel */
+        /* ─── Hero ─── */
         .hero {
             position: relative;
+            height: 560px;
             overflow: hidden;
-            height: 480px;
         }
 
         .hero-slide {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 1.2s ease;
             display: flex;
             align-items: center;
         }
 
-        .hero-slide.active {
-            opacity: 1;
+        .hero-slide.active { opacity: 1; }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
         }
 
         .hero-slide:nth-child(1) {
-            background: linear-gradient(135deg, #003366 0%, #00669e 50%, #0088cc 100%);
+            background: var(--navy);
+        }
+
+        .hero-slide:nth-child(1)::before {
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 50%, rgba(26,82,118,0.7) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 80% at 80% 20%, rgba(201,168,76,0.15) 0%, transparent 60%),
+                linear-gradient(180deg, rgba(10,30,61,0) 0%, rgba(10,30,61,0.4) 100%);
         }
 
         .hero-slide:nth-child(2) {
-            background: linear-gradient(135deg, #004d40 0%, #00796b 50%, #009688 100%);
+            background: linear-gradient(135deg, #0c2340 0%, #1a5276 100%);
+        }
+
+        .hero-slide:nth-child(2)::before {
+            background:
+                radial-gradient(ellipse 60% 60% at 70% 40%, rgba(201,168,76,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 50% at 30% 70%, rgba(26,82,118,0.5) 0%, transparent 60%);
         }
 
         .hero-slide:nth-child(3) {
-            background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+            background: linear-gradient(160deg, #0a1e3d 0%, #14365c 60%, #1a5276 100%);
+        }
+
+        .hero-slide:nth-child(3)::before {
+            background:
+                radial-gradient(ellipse 70% 70% at 60% 30%, rgba(41,128,185,0.2) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 20% 80%, rgba(201,168,76,0.1) 0%, transparent 50%);
+        }
+
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image:
+                linear-gradient(30deg, #fff 12%, transparent 12.5%, transparent 87%, #fff 87.5%, #fff),
+                linear-gradient(150deg, #fff 12%, transparent 12.5%, transparent 87%, #fff 87.5%, #fff),
+                linear-gradient(30deg, #fff 12%, transparent 12.5%, transparent 87%, #fff 87.5%, #fff),
+                linear-gradient(150deg, #fff 12%, transparent 12.5%, transparent 87%, #fff 87.5%, #fff);
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px;
         }
 
         .hero-content {
-            max-width: 1200px;
+            position: relative;
+            z-index: 2;
+            max-width: 1180px;
             margin: 0 auto;
-            padding: 0 60px;
-            color: #fff;
+            padding: 0 24px;
             width: 100%;
         }
 
-        .hero-content h1 {
-            font-size: 44px;
+        .hero-label {
+            display: inline-block;
+            font-size: 11px;
             font-weight: 700;
-            margin-bottom: 16px;
-            line-height: 1.2;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+            padding: 6px 16px;
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: 3px;
+        }
+
+        .hero-content h1 {
+            font-family: var(--serif);
+            font-size: 52px;
+            font-weight: 400;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            max-width: 580px;
         }
 
         .hero-content p {
-            font-size: 18px;
-            margin-bottom: 28px;
-            opacity: 0.9;
-            max-width: 520px;
-            line-height: 1.6;
+            font-size: 17px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.7;
+            max-width: 480px;
+            margin-bottom: 36px;
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 14px;
-        }
+        .hero-buttons { display: flex; gap: 12px; }
 
         .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            border-radius: 5px;
-            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 28px;
+            border-radius: var(--radius);
+            font-family: var(--sans);
+            font-size: 13.5px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.2s;
+            letter-spacing: 0.3px;
+            transition: all 0.25s;
             cursor: pointer;
             border: none;
         }
 
-        .btn-primary {
-            background: #fff;
-            color: #003366;
+        .btn-gold {
+            background: var(--gold);
+            color: var(--navy);
         }
 
-        .btn-primary:hover {
-            background: #e8f0fe;
+        .btn-gold:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(201,168,76,0.3);
         }
 
-        .btn-outline {
+        .btn-ghost {
             background: transparent;
-            color: #fff;
-            border: 2px solid rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.85);
+            border: 1px solid rgba(255,255,255,0.25);
         }
 
-        .btn-outline:hover {
-            border-color: #fff;
-            background: rgba(255,255,255,0.1);
+        .btn-ghost:hover {
+            border-color: rgba(255,255,255,0.5);
+            color: var(--white);
+            background: rgba(255,255,255,0.05);
         }
 
-        .btn-blue {
-            background: #00669e;
-            color: #fff;
+        .btn-navy {
+            background: var(--navy);
+            color: var(--white);
         }
 
-        .btn-blue:hover {
-            background: #005588;
+        .btn-navy:hover {
+            background: var(--navy-mid);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(10,30,61,0.2);
         }
 
-        /* Carousel Dots */
-        .hero-dots {
+        .btn-outline-navy {
+            background: transparent;
+            color: var(--navy);
+            border: 1.5px solid var(--gray-200);
+        }
+
+        .btn-outline-navy:hover {
+            border-color: var(--navy);
+            background: var(--gray-50);
+        }
+
+        .hero-nav {
             position: absolute;
-            bottom: 24px;
+            bottom: 32px;
             left: 50%;
             transform: translateX(-50%);
+            z-index: 3;
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .hero-dots span {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
+        .hero-nav button {
+            width: 40px;
+            height: 4px;
+            border: none;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.25);
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            padding: 0;
         }
 
-        .hero-dots span.active {
-            background: #fff;
+        .hero-nav button.active {
+            background: var(--gold);
+            width: 56px;
         }
 
-        /* Products Section */
-        .section {
-            padding: 60px 0;
+        /* ─── Stats Bar ─── */
+        .stats-bar {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-100);
+            padding: 0;
+            position: relative;
+            z-index: 10;
         }
 
-        .section-title {
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .stat-item {
             text-align: center;
-            margin-bottom: 40px;
+            padding: 32px 20px;
+            border-right: 1px solid var(--gray-100);
         }
 
-        .section-title h2 {
-            font-size: 30px;
-            color: #003366;
-            margin-bottom: 10px;
+        .stat-item:last-child { border-right: none; }
+
+        .stat-number {
+            font-family: var(--serif);
+            font-size: 36px;
+            color: var(--navy);
+            line-height: 1;
+            margin-bottom: 6px;
         }
 
-        .section-title p {
-            color: #666;
+        .stat-label {
+            font-size: 12.5px;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        /* ─── Products ─── */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-header .overline {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .section-header h2 {
+            font-family: var(--serif);
+            font-size: 36px;
+            color: var(--navy);
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+
+        .section-header p {
             font-size: 16px;
+            color: var(--gray-600);
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
         }
 
         .product-card {
-            background: #fff;
-            border: 1px solid #e8ecf0;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 28px 16px 22px;
+            text-align: center;
             text-decoration: none;
             color: inherit;
+            transition: all 0.3s;
+            position: relative;
         }
 
         .product-card:hover {
+            border-color: var(--blue-accent);
+            box-shadow: var(--shadow-lg);
             transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,51,102,0.12);
         }
 
-        .product-card-img {
-            height: 140px;
+        .product-card:hover .product-icon {
+            background: var(--navy);
+        }
+
+        .product-card:hover .product-icon svg {
+            stroke: var(--gold);
+        }
+
+        .product-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: var(--gray-50);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
+            margin: 0 auto 16px;
+            transition: all 0.3s;
         }
 
-        .product-card-body {
-            padding: 16px;
-            text-align: center;
+        .product-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--blue);
+            stroke-width: 1.8;
+            fill: none;
+            transition: stroke 0.3s;
         }
 
-        .product-card-body h3 {
-            font-size: 14px;
+        .product-card h3 {
+            font-size: 13.5px;
             font-weight: 600;
-            color: #003366;
+            color: var(--navy);
+            line-height: 1.35;
         }
 
-        /* Color themes for product cards */
-        .bg-blue { background: #e8f4fd; }
-        .bg-teal { background: #e0f2f1; }
-        .bg-indigo { background: #e8eaf6; }
-        .bg-amber { background: #fff8e1; }
-        .bg-green { background: #e8f5e9; }
-        .bg-purple { background: #f3e5f5; }
-        .bg-orange { background: #fff3e0; }
-        .bg-cyan { background: #e0f7fa; }
-        .bg-red { background: #fce4ec; }
-        .bg-lime { background: #f1f8e9; }
+        /* ─── Features ─── */
+        .features-section {
+            background: var(--cream);
+            position: relative;
+        }
 
-        /* Why Choose Us */
-        .features {
-            background: #f7f9fc;
+        .features-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gray-200), transparent);
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
         }
 
         .feature-card {
-            text-align: center;
-            padding: 36px 24px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            background: var(--white);
+            border-radius: 8px;
+            padding: 36px 28px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #003366, #00669e);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 28px;
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .feature-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .feature-number {
+            font-family: var(--serif);
+            font-size: 32px;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 16px;
         }
 
         .feature-card h3 {
-            font-size: 18px;
-            color: #003366;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--navy);
             margin-bottom: 10px;
         }
 
         .feature-card p {
-            color: #666;
             font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.65;
+        }
+
+        /* ─── CTA ─── */
+        .cta-section {
+            background: var(--navy);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 60% at 80% 50%, rgba(26,82,118,0.4) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 60% at 10% 30%, rgba(201,168,76,0.08) 0%, transparent 50%);
+        }
+
+        .cta-inner {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .cta-text h2 {
+            font-family: var(--serif);
+            font-size: 34px;
+            color: var(--white);
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+
+        .cta-text p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+            max-width: 480px;
             line-height: 1.6;
         }
 
-        /* CTA Banner */
-        .cta-banner {
-            background: linear-gradient(135deg, #003366, #00669e);
-            color: #fff;
-            text-align: center;
-            padding: 60px 20px;
+        .cta-actions {
+            display: flex;
+            gap: 12px;
+            flex-shrink: 0;
         }
 
-        .cta-banner h2 {
-            font-size: 30px;
-            margin-bottom: 14px;
-        }
-
-        .cta-banner p {
-            font-size: 16px;
-            opacity: 0.9;
-            margin-bottom: 24px;
-            max-width: 560px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Footer */
+        /* ─── Footer ─── */
         .footer {
-            background: #1a2332;
-            color: #aab4c0;
-            padding: 48px 0 0;
+            background: #060f1d;
+            color: rgba(255,255,255,0.4);
+            padding: 64px 0 0;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-            padding-bottom: 40px;
+            grid-template-columns: 1.8fr 1fr 1fr 1fr;
+            gap: 48px;
+            padding-bottom: 48px;
+        }
+
+        .footer-brand .brand-name {
+            font-family: var(--serif);
+            font-size: 18px;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .footer-brand .brand-tagline {
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            font-size: 13.5px;
+            line-height: 1.7;
+        }
+
+        .footer-contact {
+            margin-top: 16px;
+            font-size: 13.5px;
+            line-height: 1.8;
         }
 
         .footer h4 {
-            color: #fff;
-            font-size: 15px;
-            margin-bottom: 16px;
-        }
-
-        .footer p, .footer a {
-            font-size: 13px;
-            line-height: 1.8;
-            color: #8899aa;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 20px;
         }
 
         .footer-links {
             list-style: none;
         }
 
-        .footer-links li a {
-            display: block;
-            padding: 2px 0;
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            font-size: 13.5px;
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
         }
 
         .footer-bottom {
-            border-top: 1px solid #2a3444;
-            padding: 20px 0;
-            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 12px;
         }
 
-        /* Responsive */
+        .footer-bottom a {
+            color: rgba(255,255,255,0.35);
+            text-decoration: none;
+            margin-left: 24px;
+        }
+
+        .footer-bottom a:hover { color: rgba(255,255,255,0.7); }
+
+        .ic-reg {
+            font-size: 12px;
+            color: rgba(255,255,255,0.25);
+            margin-top: 16px;
+            line-height: 1.6;
+        }
+
+        /* ─── Scroll Animations ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 1024px) {
+            .products-grid { grid-template-columns: repeat(3, 1fr); }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+
         @media (max-width: 768px) {
-            .nav {
-                display: none;
-            }
+            .nav { display: none; }
+            .mobile-toggle { display: flex; }
+            .hero { height: 480px; }
 
-            .mobile-menu-btn {
-                display: block;
-            }
+            .hero-content h1 { font-size: 34px; }
+            .hero-content p { font-size: 15px; }
+            .hero-label { font-size: 10px; }
 
-            .hero {
-                height: 380px;
-            }
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-item:nth-child(2) { border-right: none; }
 
-            .hero-content h1 {
-                font-size: 28px;
-            }
+            .section { padding: 56px 0; }
+            .section-header h2 { font-size: 28px; }
 
-            .hero-content p {
-                font-size: 15px;
-            }
+            .cta-inner { flex-direction: column; text-align: center; }
+            .cta-text h2 { font-size: 26px; }
+            .cta-actions { justify-content: center; }
 
-            .hero-content {
-                padding: 0 24px;
-            }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
 
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
+            .hero-buttons { flex-direction: column; gap: 10px; }
+            .btn { justify-content: center; }
 
-            .hero-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
+            .top-bar-left { display: none; }
+        }
 
-            .btn {
-                text-align: center;
-            }
+        @media (max-width: 480px) {
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .product-card { padding: 20px 12px 18px; }
+            .product-icon { width: 44px; height: 44px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -510,17 +785,30 @@
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="container">
-            <a href="#">Press</a>
-            <a href="#">Branches</a>
-            <a href="#">Contact Us</a>
+            <div class="top-bar-left">IC Registration No. 2019/01</div>
+            <div class="top-bar-right">
+                <a href="#">Press</a>
+                <a href="#">Find a Branch</a>
+                <a href="#">Contact Us</a>
+            </div>
         </div>
     </div>
 
     <!-- Header -->
-    <header class="header">
-        <div class="container" style="max-width:1200px; margin:0 auto;">
+    <header class="header" id="header">
+        <div class="container">
             <a href="#" class="logo">
-                <div class="logo-icon">PG</div>
+                <div class="logo-mark">
+                    <svg viewBox="0 0 44 44" fill="none">
+                        <rect width="44" height="44" rx="6" fill="#0a1e3d"/>
+                        <path d="M12 14h6c3.3 0 6 2.7 6 6s-2.7 6-6 6h-6v-12z" stroke="#c9a84c" stroke-width="1.8"/>
+                        <path d="M18 14v12" stroke="#c9a84c" stroke-width="1.2" opacity="0.4"/>
+                        <path d="M26 14v12" stroke="#c9a84c" stroke-width="1.8"/>
+                        <path d="M26 14h4.5" stroke="#c9a84c" stroke-width="1.8"/>
+                        <path d="M26 20h3.5" stroke="#c9a84c" stroke-width="1.8"/>
+                        <rect x="10" y="30" width="24" height="1.2" rx="0.6" fill="#c9a84c" opacity="0.3"/>
+                    </svg>
+                </div>
                 <div class="logo-text">
                     <div class="brand">Prudential Guarantee</div>
                     <div class="tagline">Insuring Growth</div>
@@ -529,180 +817,261 @@
             <nav class="nav">
                 <a href="#" class="active">Home</a>
                 <a href="#">About Us</a>
-                <a href="#">Products</a>
+                <a href="#products">Products</a>
                 <a href="#">Claims</a>
                 <a href="#">Contact Us</a>
             </nav>
-            <button class="mobile-menu-btn" onclick="this.nextElementSibling?.classList.toggle('show')">&#9776;</button>
+            <button class="mobile-toggle" aria-label="Menu">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <line x1="3" y1="5" x2="17" y2="5"/>
+                    <line x1="3" y1="10" x2="17" y2="10"/>
+                    <line x1="3" y1="15" x2="17" y2="15"/>
+                </svg>
+            </button>
         </div>
     </header>
 
-    <!-- Hero Carousel -->
+    <!-- Hero -->
     <section class="hero">
         <div class="hero-slide active">
+            <div class="hero-pattern"></div>
             <div class="hero-content">
+                <div class="hero-label">Since 1960</div>
                 <h1>Protecting What Matters Most</h1>
-                <p>For over 60 years, Prudential Guarantee has been a trusted partner in safeguarding Filipino families and businesses.</p>
+                <p>For over six decades, Prudential Guarantee has been a trusted partner in safeguarding Filipino families and businesses.</p>
                 <div class="hero-buttons">
-                    <a href="#products" class="btn btn-primary">Explore Products</a>
-                    <a href="#" class="btn btn-outline">Contact Us</a>
+                    <a href="#products" class="btn btn-gold">Explore Products</a>
+                    <a href="#" class="btn btn-ghost">Contact Us</a>
                 </div>
             </div>
         </div>
         <div class="hero-slide">
+            <div class="hero-pattern"></div>
             <div class="hero-content">
-                <h1>Travel Shield Insurance</h1>
-                <p>Travel worry-free with comprehensive coverage for medical emergencies, trip cancellations, and lost baggage.</p>
+                <div class="hero-label">Travel Insurance</div>
+                <h1>Travel Shield Coverage</h1>
+                <p>Travel with confidence. Comprehensive protection for medical emergencies, trip cancellations, and lost baggage worldwide.</p>
                 <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">Learn More</a>
-                    <a href="#" class="btn btn-outline">Get a Quote</a>
+                    <a href="#" class="btn btn-gold">Learn More</a>
+                    <a href="#" class="btn btn-ghost">Get a Quote</a>
                 </div>
             </div>
         </div>
         <div class="hero-slide">
+            <div class="hero-pattern"></div>
             <div class="hero-content">
-                <h1>Acci-Shield+ Coverage</h1>
-                <p>Stay protected against accidents and dengue with our comprehensive Acci-Shield+ insurance plan.</p>
+                <div class="hero-label">Accident Protection</div>
+                <h1>Acci-Shield+ Insurance</h1>
+                <p>Stay protected against accidents and dengue with our comprehensive Acci-Shield+ plan designed for Filipino families.</p>
                 <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">Learn More</a>
-                    <a href="#" class="btn btn-outline">Contact Us</a>
+                    <a href="#" class="btn btn-gold">Learn More</a>
+                    <a href="#" class="btn btn-ghost">Contact Us</a>
                 </div>
             </div>
         </div>
-        <div class="hero-dots">
-            <span class="active" onclick="goToSlide(0)"></span>
-            <span onclick="goToSlide(1)"></span>
-            <span onclick="goToSlide(2)"></span>
+        <div class="hero-nav">
+            <button class="active" onclick="goToSlide(0)"></button>
+            <button onclick="goToSlide(1)"></button>
+            <button onclick="goToSlide(2)"></button>
         </div>
     </section>
 
-    <!-- Products Section -->
+    <!-- Stats Bar -->
+    <section class="stats-bar reveal">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">60+</div>
+                    <div class="stat-label">Years of Service</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Insurance Lines</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">Branches Nationwide</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500K+</div>
+                    <div class="stat-label">Policies Issued</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
     <section class="section" id="products">
         <div class="container">
-            <div class="section-title">
+            <div class="section-header reveal">
+                <div class="overline">Insurance Solutions</div>
                 <h2>Our Products</h2>
-                <p>Comprehensive insurance solutions for individuals and businesses</p>
+                <p>Comprehensive non-life insurance coverage designed for individuals and businesses across the Philippines.</p>
             </div>
             <div class="products-grid">
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-blue">&#128737;&#65039;</div>
-                    <div class="product-card-body"><h3>Acci-Shield+</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Acci-Shield+</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-teal">&#128663;</div>
-                    <div class="product-card-body"><h3>Auto Insurance</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><rect x="1" y="7" width="22" height="12" rx="2"/><circle cx="12" cy="13" r="3"/><path d="M5 7V5a2 2 0 012-2h10a2 2 0 012 2v2"/></svg>
+                    </div>
+                    <h3>Auto Insurance</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-indigo">&#9992;&#65039;</div>
-                    <div class="product-card-body"><h3>Aviation Insurance</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.4-.1.9.3 1.1l5.3 3.2-2.4 2.4-2 .2c-.3 0-.6.2-.7.5l-.2.5c-.1.3 0 .7.3.9l2.6 1.4 1.4 2.6c.2.3.5.4.9.3l.5-.2c.3-.1.5-.4.5-.7l.2-2 2.4-2.4 3.2 5.3c.2.4.7.5 1.1.3l.5-.3c.4-.2.6-.6.5-1.1z"/></svg>
+                    </div>
+                    <h3>Aviation Insurance</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-amber">&#9888;&#65039;</div>
-                    <div class="product-card-body"><h3>Casualty Insurance</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    </div>
+                    <h3>Casualty Insurance</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-green">&#128295;</div>
-                    <div class="product-card-body"><h3>Engineering Insurance</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                    </div>
+                    <h3>Engineering Insurance</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-purple">&#128176;</div>
-                    <div class="product-card-body"><h3>Financial Lines Insurance</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                    </div>
+                    <h3>Financial Lines</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-orange">&#127968;</div>
-                    <div class="product-card-body"><h3>Home Guard</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <h3>Home Guard</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-cyan">&#128674;</div>
-                    <div class="product-card-body"><h3>Marine Insurance</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/><path d="M9 20v-4h6v4"/><path d="M3 20l9-14 9 14"/></svg>
+                    </div>
+                    <h3>Marine Insurance</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-red">&#128106;</div>
-                    <div class="product-card-body"><h3>Family Accident</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                    </div>
+                    <h3>Family Accident</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-lime">&#129489;&#8205;&#9878;&#65039;</div>
-                    <div class="product-card-body"><h3>Personal Accident</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <h3>Personal Accident</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-blue">&#127970;</div>
-                    <div class="product-card-body"><h3>Property Insurance</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M9 3v18"/><path d="M2 9h7"/><path d="M2 15h7"/></svg>
+                    </div>
+                    <h3>Property Insurance</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-teal">&#128221;</div>
-                    <div class="product-card-body"><h3>Suretyship / Bonds</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </div>
+                    <h3>Suretyship / Bonds</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-indigo">&#9992;&#65039;</div>
-                    <div class="product-card-body"><h3>Travel Insurance</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                    </div>
+                    <h3>Travel Insurance</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-amber">&#127912;</div>
-                    <div class="product-card-body"><h3>Works of Art</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <h3>Works of Art</h3>
                 </a>
-                <a href="#" class="product-card">
-                    <div class="product-card-img bg-green">&#128656;</div>
-                    <div class="product-card-body"><h3>Auto Passenger Protector</h3></div>
+                <a href="#" class="product-card reveal">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24"><rect x="1" y="7" width="22" height="12" rx="2"/><circle cx="12" cy="13" r="3"/><path d="M12 7v-2"/><path d="M7 7V4"/><path d="M17 7V4"/></svg>
+                    </div>
+                    <h3>Auto Passenger Protector</h3>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="section features">
+    <!-- Features -->
+    <section class="section features-section">
         <div class="container">
-            <div class="section-title">
-                <h2>Why Choose Prudential Guarantee?</h2>
-                <p>Trusted by Filipinos for over six decades</p>
+            <div class="section-header reveal">
+                <div class="overline">Why Choose Us</div>
+                <h2>Built on Trust, Driven by Service</h2>
+                <p>One of the most established non-life insurance companies in the Philippines.</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">&#127942;</div>
-                    <h3>60+ Years of Trust</h3>
-                    <p>One of the most established non-life insurance companies in the Philippines, serving clients since 1960.</p>
+                <div class="feature-card reveal">
+                    <div class="feature-number">01</div>
+                    <h3>Six Decades of Excellence</h3>
+                    <p>Established in 1960, Prudential Guarantee is one of the most trusted non-life insurers in the Philippines, with a proven track record of stability and service.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#128200;</div>
+                <div class="feature-card reveal">
+                    <div class="feature-number">02</div>
                     <h3>Financial Strength</h3>
-                    <p>Backed by strong financial fundamentals, ensuring claims are settled promptly and reliably.</p>
+                    <p>Backed by strong financial fundamentals and consistently rated among the top non-life insurers, ensuring that claims are settled promptly and reliably.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#129309;</div>
-                    <h3>Customer First</h3>
-                    <p>Dedicated to providing personalized service and comprehensive coverage tailored to your needs.</p>
+                <div class="feature-card reveal">
+                    <div class="feature-number">03</div>
+                    <h3>Client-First Philosophy</h3>
+                    <p>Dedicated to providing personalized service and comprehensive coverage solutions that are carefully tailored to each client's unique needs.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#127758;</div>
-                    <h3>Nationwide Reach</h3>
-                    <p>With branches across the Philippines, we are always close to where you need us most.</p>
+                <div class="feature-card reveal">
+                    <div class="feature-number">04</div>
+                    <h3>Nationwide Presence</h3>
+                    <p>With over 30 branches across the Philippines, we maintain close proximity to our clients, ensuring accessible service wherever they are.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Banner -->
-    <section class="cta-banner">
-        <h2>Need Help Choosing the Right Coverage?</h2>
-        <p>Our insurance experts are ready to help you find the perfect plan for your needs. Chat with us now!</p>
-        <a href="#" class="btn btn-primary">Get a Quote</a>
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-inner reveal">
+                <div class="cta-text">
+                    <h2>Need Help Choosing the Right Coverage?</h2>
+                    <p>Our insurance professionals are ready to help you find the perfect plan. Speak with an advisor or chat with us now.</p>
+                </div>
+                <div class="cta-actions">
+                    <a href="#" class="btn btn-gold">Get a Quote</a>
+                    <a href="#" class="btn btn-ghost">Find a Branch</a>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div>
-                    <h4>Prudential Guarantee and Assurance, Inc.</h4>
-                    <p>Prudential Guarantee Building, 1002 Arnaiz Ave. cor. Paseo De Roxas, Makati City, Philippines 1226</p>
-                    <br>
-                    <p>Tel: (02) 8812-1800</p>
-                    <p>Email: info@prudentialguarantee.com</p>
+                <div class="footer-brand">
+                    <div class="brand-name">Prudential Guarantee and Assurance, Inc.</div>
+                    <div class="brand-tagline">Insuring Growth</div>
+                    <p>Prudential Guarantee Building<br>1002 Arnaiz Ave. cor. Paseo De Roxas<br>Makati City, Philippines 1226</p>
+                    <div class="footer-contact">
+                        <p>Tel: (02) 8812-1800</p>
+                        <p>Email: info@prudentialguarantee.com</p>
+                    </div>
+                    <div class="ic-reg">Supervised by the Insurance Commission</div>
                 </div>
                 <div>
-                    <h4>Quick Links</h4>
+                    <h4>Company</h4>
                     <ul class="footer-links">
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Our Team</a></li>
                         <li><a href="#">Corporate Governance</a></li>
                         <li><a href="#">Financial Statements</a></li>
                     </ul>
@@ -714,6 +1083,7 @@
                         <li><a href="#">Property Insurance</a></li>
                         <li><a href="#">Travel Insurance</a></li>
                         <li><a href="#">Marine Insurance</a></li>
+                        <li><a href="#">Suretyship / Bonds</a></li>
                     </ul>
                 </div>
                 <div>
@@ -723,32 +1093,54 @@
                         <li><a href="#">Find a Branch</a></li>
                         <li><a href="#">Contact Us</a></li>
                         <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Corporate Documents</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Prudential Guarantee and Assurance, Inc. All rights reserved.</p>
+                <span>&copy; 2024 Prudential Guarantee and Assurance, Inc. All rights reserved.</span>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Hero Carousel Script -->
     <script>
-        let currentSlide = 0;
+        // Hero carousel
+        let current = 0;
         const slides = document.querySelectorAll('.hero-slide');
-        const dots = document.querySelectorAll('.hero-dots span');
+        const navBtns = document.querySelectorAll('.hero-nav button');
 
         function goToSlide(n) {
-            slides[currentSlide].classList.remove('active');
-            dots[currentSlide].classList.remove('active');
-            currentSlide = n;
-            slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
+            slides[current].classList.remove('active');
+            navBtns[current].classList.remove('active');
+            current = n;
+            slides[current].classList.add('active');
+            navBtns[current].classList.add('active');
         }
 
-        setInterval(function () {
-            goToSlide((currentSlide + 1) % slides.length);
-        }, 5000);
+        setInterval(function() {
+            goToSlide((current + 1) % slides.length);
+        }, 6000);
+
+        // Sticky header shadow
+        window.addEventListener('scroll', function() {
+            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+        });
+
+        // Scroll reveal
+        var reveals = document.querySelectorAll('.reveal');
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        reveals.forEach(function(el) { observer.observe(el); });
     </script>
 
     <!-- Tenext Chatbot Widget -->
